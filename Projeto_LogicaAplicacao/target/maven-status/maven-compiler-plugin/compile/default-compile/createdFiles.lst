@@ -1,4 +1,13 @@
+br/edu/ifnmg/Projeto/LogicaAplicacao/PessoaRepositorio.class
 br/edu/ifnmg/Projeto/LogicaAplicacao/Usuario.class
-br/edu/ifnmg/Projeto/LogicaAplicacao/Usuario_.class
 br/edu/ifnmg/Projeto/LogicaAplicacao/Repositorio.class
+br/edu/ifnmg/Projeto/LogicaAplicacao/Servico.class
+br/edu/ifnmg/Projeto/LogicaAplicacao/Servico_.class
+br/edu/ifnmg/Projeto/LogicaAplicacao/PessoaTipo.class
+br/edu/ifnmg/Projeto/LogicaAplicacao/Pessoa_.class
+br/edu/ifnmg/Projeto/LogicaAplicacao/Usuario_.class
 br/edu/ifnmg/Projeto/LogicaAplicacao/UsuarioRepositorio.class
+br/edu/ifnmg/Projeto/LogicaAplicacao/Venda_.class
+br/edu/ifnmg/Projeto/LogicaAplicacao/ServicoRepositorio.class
+br/edu/ifnmg/Projeto/LogicaAplicacao/Pessoa.class
+br/edu/ifnmg/Projeto/LogicaAplicacao/Venda.class

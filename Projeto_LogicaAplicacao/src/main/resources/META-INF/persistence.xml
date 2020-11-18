@@ -3,6 +3,10 @@
   <persistence-unit name="UP" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Usuario</class>
+    <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Servico</class>
+    <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Consulta</class>
+    <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Pessoa</class>
+    <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Operacao</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Projeto?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

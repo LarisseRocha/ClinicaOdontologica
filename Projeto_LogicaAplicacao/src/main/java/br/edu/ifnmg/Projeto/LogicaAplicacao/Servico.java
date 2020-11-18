@@ -6,6 +6,7 @@
 package br.edu.ifnmg.Projeto.LogicaAplicacao;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,39 +19,28 @@ import javax.persistence.Table;
  * @author larisse
  */
 @Entity
-@Table(name = "Usuarios")
-public class Usuario implements Serializable {
+@Table(name = "Servicos")
+public class Servico implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Column(name = "login", length = 150, unique = true, nullable = false)
-    private String login;
+    @Column(name = "descricao", length = 250, nullable = false, unique = true)
+    private String descricao;
     
-    @Column(name = "senha", length = 250, nullable = false)
-    private String senha;
-
-    public Usuario() {
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
     
+    
+    @Column(precision = 8, scale = 2)
+    private BigDecimal valor;
+
+    public Servico() {
+        
+        this.id = 0L;
+        this.descricao = "" ;
+        this.valor = new BigDecimal("0.00");
+    }
     
     
 
@@ -62,6 +52,23 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -72,10 +79,10 @@ public class Usuario implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
+        if (!(object instanceof Servico)) {
             return false;
         }
-        Usuario other = (Usuario) object;
+        Servico other = (Servico) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -84,7 +91,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return this.login;
+        return descricao;
     }
     
 }
