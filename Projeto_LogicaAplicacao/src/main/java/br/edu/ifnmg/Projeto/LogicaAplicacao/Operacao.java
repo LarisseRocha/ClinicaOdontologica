@@ -37,6 +37,7 @@ public class Operacao implements Serializable {
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)  
     @JoinColumn(name = "pessoa_id", nullable = false)
     private Pessoa pessoa;
+        
     
     @Temporal(TemporalType.TIMESTAMP)
     public Date criacao;
