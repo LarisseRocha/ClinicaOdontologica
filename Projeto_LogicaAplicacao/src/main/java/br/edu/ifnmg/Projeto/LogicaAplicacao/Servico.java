@@ -29,8 +29,7 @@ public class Servico implements Serializable {
     
     @Column(name = "descricao", length = 250, nullable = false, unique = true)
     private String descricao;
-    
-    
+        
     
     @Column(precision = 8, scale = 2)
     private BigDecimal valor;

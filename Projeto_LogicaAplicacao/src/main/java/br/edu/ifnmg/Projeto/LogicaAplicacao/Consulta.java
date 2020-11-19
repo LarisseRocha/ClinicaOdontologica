@@ -26,42 +26,44 @@ import javax.persistence.TemporalType;
  * @author larisse
  */
 @Entity
-@Table(name = "Operacao")
-public class Operacao implements Serializable {
+@Table(name = "Consultas")
+public class Consulta implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)  
-    @JoinColumn(name = "pessoa_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "pessoa_id", nullable = false )
     private Pessoa pessoa;
-        
+    
+    @ManyToOne
+    @JoinColumn(name = "servico_id", nullable = false )
+    private Servico servico;
     
     @Temporal(TemporalType.TIMESTAMP)
-    public Date criacao;
+    private Date criacao;
     
     @Column(precision = 8, scale = 2)
     public BigDecimal valor;
+    
+    
 
-    public Operacao() {
-        
+    public Consulta() {
         this.id = 0L;
+        this.servico = null;
         this.pessoa = null;
-        this.valor = new BigDecimal(0.00);
         this.criacao = new Date();
-    }
-    
-    
-
-    public Long getId() {
-        return id;
+        this.valor = new BigDecimal(0.00);
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Consulta(Servico servico, BigDecimal valor) {
+        this.servico = servico;
+        this.valor = this.servico.getValor();
     }
+      
+    
 
     public Pessoa getPessoa() {
         return pessoa;
@@ -86,7 +88,24 @@ public class Operacao implements Serializable {
     public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
+
+    public Servico getServico() {
+        return servico;
+    }
+
+    public void setServico(Servico servico) {
+        this.servico = servico;
+    }
     
+    
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Override
     public int hashCode() {
@@ -98,10 +117,10 @@ public class Operacao implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Operacao)) {
+        if (!(object instanceof Consulta)) {
             return false;
         }
-        Operacao other = (Operacao) object;
+        Consulta other = (Consulta) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -110,7 +129,7 @@ public class Operacao implements Serializable {
 
     @Override
     public String toString() {
-        return id.toString();
+        return String.valueOf(this.servico) + String.valueOf(this.pessoa);
     }
-    
+
 }
