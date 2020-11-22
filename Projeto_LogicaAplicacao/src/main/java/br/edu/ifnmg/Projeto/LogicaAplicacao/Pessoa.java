@@ -38,6 +38,7 @@ public class Pessoa implements Serializable {
         
         this.id = 0L;
         this.nome = "";
+        this.tipo = PessoaTipo.Paciente;
     }
     
     

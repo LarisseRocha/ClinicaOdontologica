@@ -5,23 +5,23 @@
  */
 package br.edu.ifnmg.Projeto.Persistencia;
 
-import br.edu.ifnmg.Projeto.LogicaAplicacao.Consulta;
+import br.edu.ifnmg.Projeto.LogicaAplicacao.Atendimento;
 import java.util.List;
 
 /**
  *
  * @author larisse
  */
-public class ConsultaDAO extends DataAccessObject<Consulta>{
+public class AtendimentoDAO extends DataAccessObject<Atendimento>{
 
-    public ConsultaDAO() {
+    public AtendimentoDAO() {
         
-        super(Consulta.class);       
+        super(Atendimento.class);       
         
     }
 
     @Override
-    public List<Consulta> Buscar(Consulta obj) {
+    public List<Atendimento> Buscar(Atendimento obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

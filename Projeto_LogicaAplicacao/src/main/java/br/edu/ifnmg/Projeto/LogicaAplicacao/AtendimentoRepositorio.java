@@ -9,6 +9,6 @@ package br.edu.ifnmg.Projeto.LogicaAplicacao;
  *
  * @author larisse
  */
-public interface ConsultaRepositorio extends Repositorio<Consulta> {
+public interface AtendimentoRepositorio extends Repositorio<Atendimento> {
     
 }

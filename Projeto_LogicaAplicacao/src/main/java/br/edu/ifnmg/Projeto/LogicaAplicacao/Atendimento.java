@@ -7,16 +7,21 @@ package br.edu.ifnmg.Projeto.LogicaAplicacao;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,75 +31,40 @@ import javax.persistence.TemporalType;
  * @author larisse
  */
 @Entity
-@Table(name = "Consultas")
-public class Consulta implements Serializable {
+@Table(name = "Atendimentos")
+public class Atendimento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    @ManyToOne
-    @JoinColumn(name = "pessoa_id", nullable = false )
+
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "pessoa_id", nullable = false)
     private Pessoa pessoa;
-    
-    @ManyToOne
-    @JoinColumn(name = "servico_id", nullable = false )
-    private Servico servico;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
-    private Date criacao;
+    private Date dtVisita;
+    
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = false)
+    private StatusAtendimento status;
     
     @Column(precision = 8, scale = 2)
-    public BigDecimal valor;
+    private BigDecimal valorTotal;
     
-    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+            mappedBy = "atendimento")
+    private List<AtendimentoItem> itens;
 
-    public Consulta() {
+    public Atendimento() {
+        
         this.id = 0L;
-        this.servico = null;
         this.pessoa = null;
-        this.criacao = new Date();
-        this.valor = new BigDecimal(0.00);
-    }
-
-    public Consulta(Servico servico, BigDecimal valor) {
-        this.servico = servico;
-        this.valor = this.servico.getValor();
-    }
-      
-    
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-
-    public Date getCriacao() {
-        return criacao;
-    }
-
-    public void setCriacao(Date criacao) {
-        this.criacao = criacao;
-    }
-
-    public BigDecimal getValor() {
-        return valor;
-    }
-
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
-
-    public Servico getServico() {
-        return servico;
-    }
-
-    public void setServico(Servico servico) {
-        this.servico = servico;
+        this.valorTotal = new BigDecimal("0.00");
+        this.status = StatusAtendimento.Agendado;
+        this.dtVisita = new Date();
+        this.itens = new ArrayList<>();
     }
     
     
@@ -107,6 +77,46 @@ public class Consulta implements Serializable {
         this.id = id;
     }
 
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    public Date getDtVisita() {
+        return dtVisita;
+    }
+
+    public void setDtVisita(Date dtVisita) {
+        this.dtVisita = dtVisita;
+    }
+
+    public StatusAtendimento getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusAtendimento status) {
+        this.status = status;
+    }
+
+    public BigDecimal getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(BigDecimal valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public List<AtendimentoItem> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<AtendimentoItem> itens) {
+        this.itens = itens;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -117,10 +127,10 @@ public class Consulta implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Consulta)) {
+        if (!(object instanceof Atendimento)) {
             return false;
         }
-        Consulta other = (Consulta) object;
+        Atendimento other = (Atendimento) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -129,7 +139,7 @@ public class Consulta implements Serializable {
 
     @Override
     public String toString() {
-        return String.valueOf(this.servico) + String.valueOf(this.pessoa);
+        return this.id.toString();
     }
 
 }
