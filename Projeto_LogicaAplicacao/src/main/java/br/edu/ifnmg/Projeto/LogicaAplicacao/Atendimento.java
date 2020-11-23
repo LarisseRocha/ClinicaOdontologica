@@ -25,6 +25,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 /**
  *
@@ -55,8 +56,14 @@ public class Atendimento implements Serializable {
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             mappedBy = "atendimento")
-    private List<AtendimentoItem> itens;
-
+    private List<AtendimentoServico> itens;
+    
+    @Version
+    private int version;
+    
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private Usuario usuario;
+    
     public Atendimento() {
         
         this.id = 0L;
@@ -65,6 +72,7 @@ public class Atendimento implements Serializable {
         this.status = StatusAtendimento.Agendado;
         this.dtVisita = new Date();
         this.itens = new ArrayList<>();
+        this.version = 1;
     }
     
     
@@ -109,12 +117,20 @@ public class Atendimento implements Serializable {
         this.valorTotal = valorTotal;
     }
 
-    public List<AtendimentoItem> getItens() {
+    public List<AtendimentoServico> getItens() {
         return itens;
     }
 
-    public void setItens(List<AtendimentoItem> itens) {
+    public void setItens(List<AtendimentoServico> itens) {
         this.itens = itens;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 
     @Override

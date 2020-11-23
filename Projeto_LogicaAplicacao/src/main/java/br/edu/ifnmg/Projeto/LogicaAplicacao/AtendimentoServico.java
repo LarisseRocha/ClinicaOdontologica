@@ -22,8 +22,8 @@ import javax.persistence.Table;
  * @author larisse
  */
 @Entity
-@Table(name = "AtendimentoItens")
-public class AtendimentoItem implements Serializable {
+@Table(name = "AtendimentoServico")
+public class AtendimentoServico implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -35,26 +35,23 @@ public class AtendimentoItem implements Serializable {
     @Column(name = "quantidade", nullable = false)
     private int quantidade;
     
-    @Column(precision = 8, scale = 2)
-    private BigDecimal valorUnitario;
-    
     @Id
     @ManyToOne
     @JoinColumn(name = "servico_id", nullable = false)
     private Servico servico;
 
-    public AtendimentoItem() {
+    public AtendimentoServico() {
         
         this.atendimento = null;
         this.quantidade = 0;
         this.servico = null;
-        this.valorUnitario = new BigDecimal("0.00");
+       
     }
 
-    public AtendimentoItem(int quantidade, Servico item) {
+    public AtendimentoServico(int quantidade, Servico item) {
         this.quantidade = quantidade;
         this.servico = item;
-        this.valorUnitario = this.servico.getValor();
+       
     }
 
     public Atendimento getAtendimento() {
@@ -73,14 +70,6 @@ public class AtendimentoItem implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public BigDecimal getValorUnitario() {
-        return valorUnitario;
-    }
-
-    public void setValorUnitario(BigDecimal valorUnitario) {
-        this.valorUnitario = valorUnitario;
-    }
-
     public Servico getServico() {
         return servico;
     }
@@ -96,7 +85,6 @@ public class AtendimentoItem implements Serializable {
         int hash = 5;
         hash = 79 * hash + Objects.hashCode(this.atendimento);
         hash = 79 * hash + this.quantidade;
-        hash = 79 * hash + Objects.hashCode(this.valorUnitario);
         hash = 79 * hash + Objects.hashCode(this.servico);
         return hash;
     }
@@ -112,14 +100,11 @@ public class AtendimentoItem implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final AtendimentoItem other = (AtendimentoItem) obj;
+        final AtendimentoServico other = (AtendimentoServico) obj;
         if (this.quantidade != other.quantidade) {
             return false;
         }
         if (!Objects.equals(this.atendimento, other.atendimento)) {
-            return false;
-        }
-        if (!Objects.equals(this.valorUnitario, other.valorUnitario)) {
             return false;
         }
         if (!Objects.equals(this.servico, other.servico)) {

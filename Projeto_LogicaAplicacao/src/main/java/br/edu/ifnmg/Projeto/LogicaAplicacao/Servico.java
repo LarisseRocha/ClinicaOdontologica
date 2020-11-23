@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  *
@@ -33,12 +34,16 @@ public class Servico implements Serializable {
     
     @Column(precision = 8, scale = 2)
     private BigDecimal valor;
+    
+    @Version
+    private int version;
 
     public Servico() {
         
         this.id = 0L;
         this.descricao = "" ;
         this.valor = new BigDecimal("0.00");
+        this.version = 1;
     }
     
     
@@ -65,6 +70,14 @@ public class Servico implements Serializable {
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 
     

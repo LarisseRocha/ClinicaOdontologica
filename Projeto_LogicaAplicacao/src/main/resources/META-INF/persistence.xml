@@ -7,8 +7,10 @@
     <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Operacao</class>
     <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Orcamento</class>
     <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Atendimento</class>
-    <class>br.edu.ifnmg.Projeto.LogicaAplicacao.AtendimentoItem</class>
     <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Servico</class>
+    <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Dentista</class>
+    <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Paciente</class>
+    <class>br.edu.ifnmg.Projeto.LogicaAplicacao.AtendimentoServico</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Projeto?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -9,9 +9,6 @@ package br.edu.ifnmg.Projeto.LogicaAplicacao;
  *
  * @author larisse
  */
-public enum PessoaTipo {
-    
-    Dentista,
-    Paciente
+public interface PessoaDentistaRepositorio extends Repositorio<Dentista> {
     
 }
