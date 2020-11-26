@@ -41,7 +41,7 @@ public class Pessoa implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private PessoaTipo tipo;
     
-    //Serve para que não haja problemas no controle de concorrência ou seja mais de uma pessoa modi-
+    //Serve para que não haja problemas no controle de concorrência, ou seja, mais de uma pessoa modi-
      //ficando o código    
     @Version
     private int version;

@@ -64,6 +64,7 @@ public class Atendimento implements Serializable {
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Usuario usuario;
     
+    
     public Atendimento() {
         
         this.id = 0L;
@@ -74,7 +75,6 @@ public class Atendimento implements Serializable {
         this.itens = new ArrayList<>();
         this.version = 1;
     }
-    
     
 
     public Long getId() {
@@ -124,6 +124,23 @@ public class Atendimento implements Serializable {
     public void setItens(List<AtendimentoServico> itens) {
         this.itens = itens;
     }
+    
+    public boolean add(AtendimentoServico item){
+        
+        item.setAtendimento(this);
+        if(! this.itens.contains(item)){
+            this.itens.add(item);
+            this.valorTotal = this.valorTotal.add(item.getValor().multiply(BigDecimal.valueOf(item.getQuantidade())));
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean remove(AtendimentoServico item){
+        if(this.itens.remove(item));
+        this.valorTotal = this.valorTotal.subtract(item.getValor().multiply(BigDecimal.valueOf(item.getQuantidade())));
+            return true;
+    }
 
     public int getVersion() {
         return version;
@@ -133,6 +150,8 @@ public class Atendimento implements Serializable {
         this.version = version;
     }
 
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

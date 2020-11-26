@@ -35,6 +35,9 @@ public class AtendimentoServico implements Serializable {
     @Column(name = "quantidade", nullable = false)
     private int quantidade;
     
+    @Column(precision = 9, scale = 2)
+    private BigDecimal valor;
+    
     @Id
     @ManyToOne
     @JoinColumn(name = "servico_id", nullable = false)
@@ -45,6 +48,7 @@ public class AtendimentoServico implements Serializable {
         this.atendimento = null;
         this.quantidade = 0;
         this.servico = null;
+        this.valor = new BigDecimal("0.00");
        
     }
 
@@ -76,6 +80,14 @@ public class AtendimentoServico implements Serializable {
 
     public void setServico(Servico servico) {
         this.servico = servico;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
     }
 
    
