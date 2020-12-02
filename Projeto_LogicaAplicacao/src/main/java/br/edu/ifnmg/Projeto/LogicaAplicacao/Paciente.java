@@ -21,11 +21,8 @@ import javax.persistence.Version;
  */
 @Entity
 @Table(name = "Paciente")
-@DiscriminatorValue(value = "2")
+@DiscriminatorValue(value = "0")
 public class Paciente extends Pessoa implements Serializable {
-
-    @Column(length = 250, nullable = false)
-    private String nome;
     
     @Column(length = 250, nullable = false)
     private String rg;
@@ -39,19 +36,22 @@ public class Paciente extends Pessoa implements Serializable {
     public Paciente() {
         
         super();
-        this.nome = "";
+        this.setTipo(PessoaTipo.Paciente);
         this.email = "";
-        this.email = "";
+        this.rg = "";
+        this.version = 1;
         
     }
 
-    public String getNome() {
-        return nome;
+    public Paciente(String nome, String rg, String email) {
+        super();
+        this.setTipo(PessoaTipo.Paciente);
+        this.setNome(nome);
+        this.rg = rg;
+        this.email = email;
+        this.version = version;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public String getRg() {
         return rg;

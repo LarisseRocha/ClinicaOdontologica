@@ -45,9 +45,14 @@ public class Servico implements Serializable {
         this.valor = new BigDecimal("0.00");
         this.version = 1;
     }
-    
-    
 
+    public Servico(String descricao, String valor) {
+        this.id = id;
+        this.descricao = descricao;
+        this.valor = new BigDecimal(valor);
+        this.version = version;
+    }
+    
     public Long getId() {
         return id;
     }

@@ -6,13 +6,14 @@
 package br.edu.ifnmg.Projeto.Persistencia;
 
 import br.edu.ifnmg.Projeto.LogicaAplicacao.Atendimento;
+import br.edu.ifnmg.Projeto.LogicaAplicacao.AtendimentoRepositorio;
 import java.util.List;
 
 /**
  *
  * @author larisse
  */
-public class AtendimentoDAO extends DataAccessObject<Atendimento>{
+public class AtendimentoDAO extends DataAccessObject<Atendimento> implements AtendimentoRepositorio{
 
     public AtendimentoDAO() {
         

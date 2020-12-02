@@ -6,13 +6,14 @@
 package br.edu.ifnmg.Projeto.Persistencia;
 
 import br.edu.ifnmg.Projeto.LogicaAplicacao.Servico;
+import br.edu.ifnmg.Projeto.LogicaAplicacao.ServicoRepositorio;
 import java.util.List;
 
 /**
  *
  * @author larisse
  */
-public class ServicoDAO extends DataAccessObject<Servico>{
+public class ServicoDAO extends DataAccessObject<Servico> implements ServicoRepositorio{
     
     public ServicoDAO(){
         super(Servico.class);

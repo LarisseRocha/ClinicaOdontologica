@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  *
@@ -25,33 +26,36 @@ import javax.persistence.Table;
 public class Dentista extends Pessoa implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
-    @Column(length = 11, nullable = false)
-    private String nome;
-    
-    @Column(length = 11, nullable = false, unique = true)
+      
+    @Column(length = 250, nullable = false, unique = true)
     private String cpf;
     
-    @Column(length = 11, nullable = false)
+    @Column(length = 250, nullable = false)
     private String rg;
     
-    @Column(length = 11, nullable = false)
+    @Column(length = 250, nullable = false)
     private String CRO;
+    
+   @Version
+   private int version;
 
     public Dentista() {
         super();
+        this.setTipo(PessoaTipo.Dentista);
         this.cpf = "";
-        this.nome = "";
         this.rg = "";
         this.CRO = "";
+        this.version = 1;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+    public Dentista(String nome, String cpf, String rg, String CRO) {
+        super();
+        this.setTipo(PessoaTipo.Dentista);
+        this.setNome(nome);
+        this.cpf = cpf;
+        this.rg = rg;
+        this.CRO = CRO;
+        this.version = 1;
     }
 
     public String getCpf() {

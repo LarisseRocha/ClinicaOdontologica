@@ -52,10 +52,11 @@ public class AtendimentoServico implements Serializable {
        
     }
 
-    public AtendimentoServico(int quantidade, Servico item) {
+    public AtendimentoServico(Servico servico, int quantidade) {
+        this.servico = servico;
         this.quantidade = quantidade;
-        this.servico = item;
-       
+      //  this.valor = this.servico.getValor();
+        
     }
 
     public Atendimento getAtendimento() {

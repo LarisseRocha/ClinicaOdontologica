@@ -75,6 +75,16 @@ public class Atendimento implements Serializable {
         this.itens = new ArrayList<>();
         this.version = 1;
     }
+
+    public Atendimento(Pessoa pessoa,  Usuario usuario) {
+        this.id = 0L;
+        this.pessoa = null;
+        this.valorTotal = new BigDecimal("0.00");
+        this.status = StatusAtendimento.Agendado;
+        this.dtVisita = new Date();
+        this.itens = new ArrayList<>();
+        this.version = 1; 
+    }
     
 
     public Long getId() {
@@ -126,19 +136,20 @@ public class Atendimento implements Serializable {
     }
     
     public boolean add(AtendimentoServico item){
-        
-        item.setAtendimento(this);
-        if(! this.itens.contains(item)){
+        if(!this.itens.contains(item)){
             this.itens.add(item);
-            this.valorTotal = this.valorTotal.add(item.getValor().multiply(BigDecimal.valueOf(item.getQuantidade())));
+            this.valorTotal = this.valorTotal.add(
+            item.getValor().multiply(BigDecimal.valueOf(item.getQuantidade())));
             return true;
         }
         return false;
     }
     
+    
     public boolean remove(AtendimentoServico item){
         if(this.itens.remove(item));
-        this.valorTotal = this.valorTotal.subtract(item.getValor().multiply(BigDecimal.valueOf(item.getQuantidade())));
+        this.valorTotal = this.valorTotal.subtract(item.getValor().
+                multiply(BigDecimal.valueOf(item.getQuantidade())));
             return true;
     }
 

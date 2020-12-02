@@ -33,10 +33,21 @@ public class Usuario implements Serializable {
     private String senha;
 
     public Usuario() {
+        
+        this.id = 0L;
+        this.login = "";
+        this.senha = "";
+    }
+
+    public Usuario(String login, String senha) {
+        this.id = 0L;
+        this.login = login;
+        this.senha = senha;
     }
 
     public String getLogin() {
         return login;
+        
     }
 
     public void setLogin(String login) {
@@ -50,9 +61,7 @@ public class Usuario implements Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
-    
-    
+        
 
     public Long getId() {
         return id;
