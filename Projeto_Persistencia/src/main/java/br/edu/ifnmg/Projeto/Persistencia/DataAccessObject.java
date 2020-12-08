@@ -30,16 +30,15 @@ public abstract class DataAccessObject<T> implements Repositorio<T> {
 
     @Override
     public boolean Salvar(T obj) {
-        EntityTransaction transacao = this.manager.getTransaction();
+        EntityTransaction atendimento = this.manager.getTransaction();
         try{
-            transacao.begin();            
+           atendimento.begin();            
             this.manager.persist(obj);
-            transacao.commit();
+           atendimento.commit();
             
             return true;
         }catch(Exception ex){
-            transacao.rollback();
-            
+            atendimento.rollback();
         }
         return false;
     }

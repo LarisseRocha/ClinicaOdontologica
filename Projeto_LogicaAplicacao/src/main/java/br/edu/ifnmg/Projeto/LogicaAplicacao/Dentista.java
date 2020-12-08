@@ -10,9 +10,6 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -105,20 +102,12 @@ public class Dentista extends Pessoa implements Serializable {
         if (!Objects.equals(this.cpf, other.cpf)) {
             return false;
         }
-        if (!Objects.equals(this.CRO, other.CRO)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.CRO, other.CRO);
     }
 
     @Override
     public String toString() {
         return cpf;
     }
-    
-    
-
-    
-
     
 }

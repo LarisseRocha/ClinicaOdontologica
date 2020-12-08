@@ -6,8 +6,8 @@
 package br.edu.ifnmg.Projeto.Persistencia;
 
 import br.edu.ifnmg.Projeto.LogicaAplicacao.Atendimento;
-import br.edu.ifnmg.Projeto.LogicaAplicacao.AtendimentoRepositorio;
 import java.util.List;
+import br.edu.ifnmg.Projeto.LogicaAplicacao.AtendimentoRepositorio;
 
 /**
  *

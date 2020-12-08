@@ -6,17 +6,17 @@
     <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Pessoa</class>
     <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Operacao</class>
     <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Orcamento</class>
-    <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Atendimento</class>
     <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Servico</class>
     <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Dentista</class>
     <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Paciente</class>
-    <class>br.edu.ifnmg.Projeto.LogicaAplicacao.AtendimentoServico</class>
+    <class>br.edu.ifnmg.Projeto.LogicaAplicacao.Atendimento</class>
+    <class>br.edu.ifnmg.Projeto.LogicaAplicacao.AtendimentoItens</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Projeto?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="123"/>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
 </persistence>

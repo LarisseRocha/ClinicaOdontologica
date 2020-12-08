@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -25,32 +26,37 @@ public class Servico implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @Column(name = "descricao", length = 250, nullable = false, unique = true)
     private String descricao;
         
     
-    @Column(precision = 8, scale = 2)
+    @Column(precision = 8, scale = 2, nullable = false)
     private BigDecimal valor;
     
     @Version
     private int version;
-
+    
+    @ManyToOne
+    private Usuario usuario;
+    
     public Servico() {
         
         this.id = 0L;
         this.descricao = "" ;
         this.valor = new BigDecimal("0.00");
         this.version = 1;
+       
     }
 
     public Servico(String descricao, String valor) {
-        this.id = id;
+        this.id = 0L;
         this.descricao = descricao;
         this.valor = new BigDecimal(valor);
-        this.version = version;
+        this.version = 1;
+      
     }
     
     public Long getId() {
@@ -75,6 +81,14 @@ public class Servico implements Serializable {
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public int getVersion() {

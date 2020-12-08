@@ -32,12 +32,12 @@ import javax.persistence.Version;
  * @author larisse
  */
 @Entity
-@Table(name = "Atendimentos")
+@Table(name = "atendimentos")
 public class Atendimento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
@@ -56,13 +56,13 @@ public class Atendimento implements Serializable {
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             mappedBy = "atendimento")
-    private List<AtendimentoServico> itens;
+    private List<AtendimentoItens> itens;
     
     @Version
     private int version;
     
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    private Usuario usuario;
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    private Usuario user;
     
     
     public Atendimento() {
@@ -76,17 +76,25 @@ public class Atendimento implements Serializable {
         this.version = 1;
     }
 
-    public Atendimento(Pessoa pessoa,  Usuario usuario) {
+    public Atendimento(Pessoa pessoa, StatusAtendimento status, Usuario user) {
         this.id = 0L;
-        this.pessoa = null;
+        this.pessoa = pessoa;
         this.valorTotal = new BigDecimal("0.00");
-        this.status = StatusAtendimento.Agendado;
+        this.status = status;
         this.dtVisita = new Date();
         this.itens = new ArrayList<>();
         this.version = 1; 
+        this.user = user;
+    }
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
     }
     
-
     public Long getId() {
         return id;
     }
@@ -127,31 +135,15 @@ public class Atendimento implements Serializable {
         this.valorTotal = valorTotal;
     }
 
-    public List<AtendimentoServico> getItens() {
+    public List<AtendimentoItens> getItens() {
         return itens;
     }
 
-    public void setItens(List<AtendimentoServico> itens) {
+    public void setItens(List<AtendimentoItens> itens) {
         this.itens = itens;
     }
     
-    public boolean add(AtendimentoServico item){
-        if(!this.itens.contains(item)){
-            this.itens.add(item);
-            this.valorTotal = this.valorTotal.add(
-            item.getValor().multiply(BigDecimal.valueOf(item.getQuantidade())));
-            return true;
-        }
-        return false;
-    }
-    
-    
-    public boolean remove(AtendimentoServico item){
-        if(this.itens.remove(item));
-        this.valorTotal = this.valorTotal.subtract(item.getValor().
-                multiply(BigDecimal.valueOf(item.getQuantidade())));
-            return true;
-    }
+   
 
     public int getVersion() {
         return version;
@@ -160,8 +152,35 @@ public class Atendimento implements Serializable {
     public void setVersion(int version) {
         this.version = version;
     }
+    
+     public boolean add(AtendimentoItens itens){
+        itens.setAtendimento(this);
+        if(! this.itens.contains(itens)){
+            this.itens.add(itens);
+            this.valorTotal = this.valorTotal.add(
+                   itens.getValor().multiply(BigDecimal.valueOf(itens.getQuantidade())));
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean remove(AtendimentoItens itens){
+        if(this.itens.contains(itens)){
+            this.itens.remove(itens);
+            this.valorTotal = this.valorTotal.subtract(
+                    itens.getValor().multiply(BigDecimal.valueOf(itens.getQuantidade())));
+            return true;
+        }
+        return false;
+    }
 
     
+    /*public boolean remove(AtendimentoServico item){
+        if(this.itens.remove(item));
+        this.valorTotal = this.valorTotal.subtract(item.getValor().
+                multiply(BigDecimal.valueOf(item.getQuantidade())));
+            return true;
+    }*/
     
     @Override
     public int hashCode() {
