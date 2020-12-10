@@ -8,6 +8,7 @@ package br.edu.ifnmg.Projeto.Persistencia;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.Paciente;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.PessoaPacienteRepositorio;
 import java.util.List;
+import javax.persistence.Query;
 
 /**
  *
@@ -21,10 +22,18 @@ public class PacienteDAO extends DataAccessObject<Paciente> implements PessoaPac
 
     @Override
     public List<Paciente> Buscar(Paciente obj) {
-        return null;
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      Query consulta = this.manager.createQuery("select pac from Paciente pac");
+      return consulta.getResultList();
     }
+
+    @Override
+    public Paciente AbrirPorCpf(String cpf) {
+      Query consulta = this.manager.createQuery("select pac from Paciente pac where pac.cpf=:parametro");
+      consulta.setParameter("parametro", cpf);
+      return (Paciente) consulta.getSingleResult();
+    }
+
     
-    
+ 
     
 }

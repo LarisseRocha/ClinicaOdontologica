@@ -18,7 +18,7 @@ import javax.persistence.Persistence;
 public abstract class DataAccessObject<T> implements Repositorio<T> {
     
     private Class tipo;
-    private EntityManager manager;
+    protected EntityManager manager;
     
     //Inicia o gerenciador de entidades
     public DataAccessObject(Class tipo){

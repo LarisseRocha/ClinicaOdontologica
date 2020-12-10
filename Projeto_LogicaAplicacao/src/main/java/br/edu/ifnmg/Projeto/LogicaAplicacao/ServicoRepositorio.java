@@ -11,4 +11,5 @@ package br.edu.ifnmg.Projeto.LogicaAplicacao;
  */
 public interface ServicoRepositorio extends Repositorio<Servico> {
     
+ 
 }

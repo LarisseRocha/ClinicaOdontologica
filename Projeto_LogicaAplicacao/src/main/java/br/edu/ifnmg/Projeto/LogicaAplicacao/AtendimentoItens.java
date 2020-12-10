@@ -51,7 +51,7 @@ public class AtendimentoItens implements Serializable {
        
     }
 
-    public AtendimentoItens(Servico servico, int quantidade, Long id) {
+    public AtendimentoItens(Servico servico, int quantidade) {
         this.servico = servico;
         this.quantidade = quantidade;
         this.valor = servico.getValor();      

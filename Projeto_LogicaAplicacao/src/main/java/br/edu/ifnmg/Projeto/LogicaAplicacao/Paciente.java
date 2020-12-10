@@ -25,7 +25,7 @@ import javax.persistence.Version;
 public class Paciente extends Pessoa implements Serializable {
     
     @Column(length = 250, nullable = false)
-    private String rg;
+    private String cpf;
     
     @Column(length = 250)
     private String email;
@@ -38,7 +38,7 @@ public class Paciente extends Pessoa implements Serializable {
         super();
         this.setTipo(PessoaTipo.Paciente);
         this.email = "";
-        this.rg = "";
+        this.cpf = "";
         this.version = 1;
         
     }
@@ -47,18 +47,18 @@ public class Paciente extends Pessoa implements Serializable {
         super();
         this.setTipo(PessoaTipo.Paciente);
         this.setNome(nome);
-        this.rg = rg;
+        this.cpf = rg;
         this.email = email;
         this.version = version;
     }
 
 
     public String getRg() {
-        return rg;
+        return cpf;
     }
 
     public void setRg(String rg) {
-        this.rg = rg;
+        this.cpf = rg;
     }
 
     public String getEmail() {
@@ -71,7 +71,7 @@ public class Paciente extends Pessoa implements Serializable {
 
     @Override
     public String toString() {
-        return rg;
+        return cpf;
     }
     
     

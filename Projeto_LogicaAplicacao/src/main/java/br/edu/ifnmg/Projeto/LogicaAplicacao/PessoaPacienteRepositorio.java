@@ -11,4 +11,5 @@ package br.edu.ifnmg.Projeto.LogicaAplicacao;
  */
 public interface PessoaPacienteRepositorio extends Repositorio<Paciente>{
     
+    public Paciente AbrirPorCpf(String cpf);
 }

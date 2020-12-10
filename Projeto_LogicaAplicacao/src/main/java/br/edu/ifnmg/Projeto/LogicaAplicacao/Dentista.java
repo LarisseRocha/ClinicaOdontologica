@@ -31,7 +31,7 @@ public class Dentista extends Pessoa implements Serializable {
     private String rg;
     
     @Column(length = 250, nullable = false)
-    private String CRO;
+    private String Registro;
     
    @Version
    private int version;
@@ -41,7 +41,7 @@ public class Dentista extends Pessoa implements Serializable {
         this.setTipo(PessoaTipo.Dentista);
         this.cpf = "";
         this.rg = "";
-        this.CRO = "";
+        this.Registro = "";
         this.version = 1;
     }
 
@@ -51,7 +51,7 @@ public class Dentista extends Pessoa implements Serializable {
         this.setNome(nome);
         this.cpf = cpf;
         this.rg = rg;
-        this.CRO = CRO;
+        this.Registro = CRO;
         this.version = 1;
     }
 
@@ -72,18 +72,18 @@ public class Dentista extends Pessoa implements Serializable {
     }
 
     public String getCRO() {
-        return CRO;
+        return Registro;
     }
 
     public void setCRO(String CRO) {
-        this.CRO = CRO;
+        this.Registro = CRO;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 67 * hash + Objects.hashCode(this.cpf);
-        hash = 67 * hash + Objects.hashCode(this.CRO);
+        hash = 67 * hash + Objects.hashCode(this.Registro);
         return hash;
     }
 
@@ -102,7 +102,7 @@ public class Dentista extends Pessoa implements Serializable {
         if (!Objects.equals(this.cpf, other.cpf)) {
             return false;
         }
-        return Objects.equals(this.CRO, other.CRO);
+        return Objects.equals(this.Registro, other.Registro);
     }
 
     @Override

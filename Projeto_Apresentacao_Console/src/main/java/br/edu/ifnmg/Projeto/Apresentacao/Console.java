@@ -21,6 +21,7 @@ import br.edu.ifnmg.Projeto.Persistencia.PacienteDAO;
 import br.edu.ifnmg.Projeto.Persistencia.ServicoDAO;
 import br.edu.ifnmg.Projeto.Persistencia.UsuarioDAO;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.AtendimentoRepositorio;
+import br.edu.ifnmg.Projeto.LogicaAplicacao.Pessoa;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.StatusAtendimento;
 
 /**
@@ -56,8 +57,8 @@ public class Console {
         repos.Salvar(new Servico("Prótese dentária", "800"));
         repos.Salvar(new Servico("Extracao", "300"));
         
-        var user1 = repou.Abrir(1L);
-        var user2 = repou.Abrir(2L);
+        var usuario1 = repou.Abrir(1L);
+        var usuario2 = repou.Abrir(2L);
         
         var dentista1 = repod.Abrir(1L);
         var dentista2 = repod.Abrir(2L);
@@ -72,48 +73,40 @@ public class Console {
         
         AtendimentoRepositorio repoa = new AtendimentoDAO();
         
-        Atendimento a1 = new Atendimento(paciente1, StatusAtendimento.Agendado, user2 );
-        a1.add(new AtendimentoItens(servico2, 1, 1L));
-        a1.add(new AtendimentoItens(servico1, 2, 2L));
+        Atendimento a1 = new Atendimento(paciente1, StatusAtendimento.Agendado, usuario2 );
+        a1.add(new AtendimentoItens(servico2, 1));
+        a1.add(new AtendimentoItens(servico1, 2));
                 
         repoa.Salvar(a1);
         
-        Atendimento a2 = new Atendimento(dentista2, StatusAtendimento.Agendado, user1 );
-        a2.add(new AtendimentoItens(servico2, 1, 3L));
-        a2.add(new AtendimentoItens(servico3, 3, 4L));
+        Atendimento a2 = new Atendimento(dentista2, StatusAtendimento.Agendado, usuario1 );
+        a2.add(new AtendimentoItens(servico2, 1));
+        a2.add(new AtendimentoItens(servico3, 3));
         
         repoa.Salvar(a2);
         
-        Atendimento a3 = new Atendimento(paciente2, StatusAtendimento.Agendado, user1 );
-        a3.add(new AtendimentoItens(servico4, 1, 5L));
-        a3.add(new AtendimentoItens(servico1, 1, 6L));
+        Atendimento a3 = new Atendimento(paciente2, StatusAtendimento.Agendado, usuario1 );
+        a3.add(new AtendimentoItens(servico4, 1));
+        a3.add(new AtendimentoItens(servico1, 1));
         
         repoa.Salvar(a3);
         
-        Atendimento a4 = new Atendimento(dentista1, StatusAtendimento.Agendado, user1 );
-        a4.add(new AtendimentoItens(servico2, 1, 7L));
-        a4.add(new AtendimentoItens(servico1, 1, 8L));
+        Atendimento a4 = new Atendimento(dentista1, StatusAtendimento.Agendado, usuario1 );
+        a4.add(new AtendimentoItens(servico2, 1));
+        a4.add(new AtendimentoItens(servico1, 1));
         
         repoa.Salvar(a4);
          
         
     }
     public static void main(String[] args) {
-        // TODO code application logic here
-        
-       /* UsuarioRepositorio repo = new UsuarioDAO();
-                
-        Usuario u = new Usuario();
-        u.setLogin("Larisse");
-        u.setSenha("123");
-        
-        
-        if(repo.Salvar(u)){
-            System.out.println("Sucesso!");
-        }else{
-            System.out.println("Falha");
-        
-    }*/
-             criarBase();
+     
+           // criarBase();
+             
+            PessoaPacienteRepositorio repo_pac = new PacienteDAO();
+            
+            for(Pessoa pac : repo_pac.Buscar(null)){
+                System.out.println(pac.getNome());
+            }
     }
 }

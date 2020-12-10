@@ -62,7 +62,7 @@ public class Atendimento implements Serializable {
     private int version;
     
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    private Usuario user;
+    private Usuario usuario;
     
     
     public Atendimento() {
@@ -76,7 +76,7 @@ public class Atendimento implements Serializable {
         this.version = 1;
     }
 
-    public Atendimento(Pessoa pessoa, StatusAtendimento status, Usuario user) {
+    public Atendimento(Pessoa pessoa, StatusAtendimento status, Usuario usuario) {
         this.id = 0L;
         this.pessoa = pessoa;
         this.valorTotal = new BigDecimal("0.00");
@@ -84,15 +84,15 @@ public class Atendimento implements Serializable {
         this.dtVisita = new Date();
         this.itens = new ArrayList<>();
         this.version = 1; 
-        this.user = user;
+        this.usuario = usuario;
     }
 
     public Usuario getUser() {
-        return user;
+        return usuario;
     }
 
     public void setUser(Usuario user) {
-        this.user = user;
+        this.usuario = user;
     }
     
     public Long getId() {

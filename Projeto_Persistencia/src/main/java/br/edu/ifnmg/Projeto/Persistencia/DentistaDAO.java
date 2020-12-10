@@ -6,8 +6,10 @@
 package br.edu.ifnmg.Projeto.Persistencia;
 
 import br.edu.ifnmg.Projeto.LogicaAplicacao.Dentista;
+import static br.edu.ifnmg.Projeto.LogicaAplicacao.Dentista_.Registro;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.PessoaDentistaRepositorio;
 import java.util.List;
+import javax.persistence.Query;
 
 /**
  *
@@ -22,7 +24,15 @@ public class DentistaDAO extends DataAccessObject<Dentista> implements PessoaDen
 
     @Override
     public List<Dentista> Buscar(Dentista obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       Query consulta = this.manager.createQuery("select dt from Dentista");
+       return consulta.getResultList();
+    }
+
+    @Override
+    public Dentista AbrirPorRegistro(String registro) {
+      Query consulta = this.manager.createQuery("select dt from Dentista dt where dt.Registro=:parametro");
+      consulta.setParameter("parametro", registro);
+      return (Dentista) consulta.getSingleResult();
     }
     
 }
