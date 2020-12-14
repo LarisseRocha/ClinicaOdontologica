@@ -120,7 +120,7 @@ public class Principal extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // TODO add your handling code here:
        String login = txtLogin.getText();
-       String senha = txtSenha.getPassword().toString();
+       String senha = String.valueOf(txtSenha.getPassword());
        
       if(repositorio.autenticar(login, senha)){
         frmMain tela = new frmMain();
