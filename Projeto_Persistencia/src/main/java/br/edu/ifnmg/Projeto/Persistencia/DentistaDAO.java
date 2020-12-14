@@ -6,7 +6,7 @@
 package br.edu.ifnmg.Projeto.Persistencia;
 
 import br.edu.ifnmg.Projeto.LogicaAplicacao.Dentista;
-import static br.edu.ifnmg.Projeto.LogicaAplicacao.Dentista_.Registro;
+import br.edu.ifnmg.Projeto.LogicaAplicacao.Paciente;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.PessoaDentistaRepositorio;
 import java.util.List;
 import javax.persistence.Query;
@@ -18,21 +18,24 @@ import javax.persistence.Query;
 public class DentistaDAO extends DataAccessObject<Dentista> implements PessoaDentistaRepositorio {
 
     public DentistaDAO() {
-        super(Dentista.class);
+        super(Paciente.class);
     }
-    
 
+  
     @Override
     public List<Dentista> Buscar(Dentista obj) {
-       Query consulta = this.manager.createQuery("select dt from Dentista");
-       return consulta.getResultList();
+       /*Query consulta = this.manager.createQuery("select dt from Dentista");
+       return consulta.getResultList();*/
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    @Override
+   /* @Override
     public Dentista AbrirPorRegistro(String registro) {
       Query consulta = this.manager.createQuery("select dt from Dentista dt where dt.Registro=:parametro");
       consulta.setParameter("parametro", registro);
       return (Dentista) consulta.getSingleResult();
-    }
+    }*/
+
+   
     
 }

@@ -7,6 +7,8 @@ package br.edu.ifnmg.Projeto.Persistencia;
 
 import br.edu.ifnmg.Projeto.LogicaAplicacao.Paciente;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.PessoaPacienteRepositorio;
+import static br.edu.ifnmg.Projeto.LogicaAplicacao.Pessoa_.nome;
+import java.util.Hashtable;
 import java.util.List;
 import javax.persistence.Query;
 
@@ -22,8 +24,37 @@ public class PacienteDAO extends DataAccessObject<Paciente> implements PessoaPac
 
     @Override
     public List<Paciente> Buscar(Paciente obj) {
+      /*String jpql = "select pac from Paciente pac";  
+      String filtro = "";
+      Hashtable<String, Object> parametros = new Hashtable<>();
+      
+      if(obj != null){
+      
+        if(obj.getNome().length()>0){
+
+            filtro += "pac.nome like :nome";
+            parametros.put("nome", obj.getNome() + "%");
+        }
+
+        if(obj.getTelefone() != null){
+
+            if(filtro.length() > 0) filtro += "and";
+            filtro += "pac.email =: email";
+            parametros.put("email", obj.getTelefone() + "%");
+        }
+      
+      }
+     if(filtro.length()>0)  
+        jpql = jpql +"where" +filtro;
+     Query consulta = this.manager.createQuery(jpql);
+
+     for(String chave : parametros.keySet()) 
+            consulta.setParameter(chave, parametros.get(obj));
+     
+     return consulta.getResultList();*/
       Query consulta = this.manager.createQuery("select pac from Paciente pac");
       return consulta.getResultList();
+       
     }
 
     @Override
@@ -32,6 +63,7 @@ public class PacienteDAO extends DataAccessObject<Paciente> implements PessoaPac
       consulta.setParameter("parametro", cpf);
       return (Paciente) consulta.getSingleResult();
     }
+
 
     
  

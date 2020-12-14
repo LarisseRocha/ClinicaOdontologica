@@ -11,6 +11,6 @@ package br.edu.ifnmg.Projeto.LogicaAplicacao;
  */
 public interface PessoaDentistaRepositorio extends Repositorio<Dentista> {
     
-  public Dentista AbrirPorRegistro(String registro);
+  //public Dentista AbrirPorRegistro(String registro);
     
 }

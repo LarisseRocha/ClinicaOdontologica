@@ -28,7 +28,7 @@ public class Paciente extends Pessoa implements Serializable {
     private String cpf;
     
     @Column(length = 250)
-    private String email;
+    private String telefone;
     
     @Version
     private int version;
@@ -37,36 +37,35 @@ public class Paciente extends Pessoa implements Serializable {
         
         super();
         this.setTipo(PessoaTipo.Paciente);
-        this.email = "";
+        this.telefone = "";
         this.cpf = "";
         this.version = 1;
         
     }
 
-    public Paciente(String nome, String rg, String email) {
+    public Paciente(String nome, String cpf, String telefone) {
         super();
         this.setTipo(PessoaTipo.Paciente);
         this.setNome(nome);
-        this.cpf = rg;
-        this.email = email;
+        this.cpf = cpf;
+        this.telefone = telefone;
         this.version = version;
     }
 
-
-    public String getRg() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setRg(String rg) {
-        this.cpf = rg;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public String getEmail() {
-        return email;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     @Override

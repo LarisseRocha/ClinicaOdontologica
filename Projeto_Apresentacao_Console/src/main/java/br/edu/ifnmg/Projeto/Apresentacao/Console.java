@@ -22,7 +22,16 @@ import br.edu.ifnmg.Projeto.Persistencia.ServicoDAO;
 import br.edu.ifnmg.Projeto.Persistencia.UsuarioDAO;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.AtendimentoRepositorio;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.Pessoa;
+import br.edu.ifnmg.Projeto.LogicaAplicacao.RepositorioFactory;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.StatusAtendimento;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -36,20 +45,20 @@ public class Console {
     public static void criarBase(){
         
         UsuarioRepositorio repou = new UsuarioDAO();
-        repou.Salvar(new Usuario("Recepcao1", "123"));
-        repou.Salvar(new Usuario("Recepcao2", "124"));
+        repou.Salvar(new Usuario("Recepção1", "123"));
+        repou.Salvar(new Usuario("Recepção2", "231"));
         
         PessoaDentistaRepositorio repod = new DentistaDAO();
-        repod.Salvar(new Dentista("João","000.000.000-00","00.000.000","xxxxxx"));
-        repod.Salvar(new Dentista("Mariana","111.111.111-11","11.111.111","yyyyyy"));
-        repod.Salvar(new Dentista("Julia","333.333.333-33","33.333.333","zzzzzz"));
+        repod.Salvar(new Dentista("João","000.010.000-00","00.200.000","21345"));
+        repod.Salvar(new Dentista("Mariana","111.111.111-11","11.111.111","54321"));
+        repod.Salvar(new Dentista("Julia","333.433.333-33","32.333.333","22331"));
         
         PessoaPacienteRepositorio repop = new PacienteDAO();
-        repop.Salvar(new Paciente("Jonas Márcio","000.000.000-00","jonas23@mail.com"));
-        repop.Salvar(new Paciente("Maria Eduarda","111.111.111-11","maria1024@gmail.com"));
-        repop.Salvar(new Paciente("Junior Do Nascimento","333.333.333-33","Sem email"));
-        repop.Salvar(new Paciente("Jose Silva","444.333.333-33","Sem email"));
-        repop.Salvar(new Paciente("Junior Oliveira","333.333.333-33","Sem email"));
+        repop.Salvar(new Paciente("Jonas Márcio","000.000.000-00","9999-9999"));
+        repop.Salvar(new Paciente("Maria Eduarda","111.111.111-11","8888-8888"));
+        repop.Salvar(new Paciente("Junior Do Nascimento","333.333.333-33","0000-0000"));
+        repop.Salvar(new Paciente("Jose Silva","444.333.333-33","1111-2222"));
+        repop.Salvar(new Paciente("Junior Oliveira","333.333.333-33","4444-4444"));
         
         ServicoRepositorio repos = new ServicoDAO();
         repos.Salvar(new Servico("Implante dentário", "1.050"));
@@ -60,8 +69,8 @@ public class Console {
         var usuario1 = repou.Abrir(1L);
         var usuario2 = repou.Abrir(2L);
         
-        var dentista1 = repod.Abrir(1L);
-        var dentista2 = repod.Abrir(2L);
+        var dent1 = repod.Abrir(1L);
+        var dent2 = repod.Abrir(2L);
         
         var paciente1 = repop.Abrir(4L);
         var paciente2 = repop.Abrir(5L);
@@ -79,7 +88,7 @@ public class Console {
                 
         repoa.Salvar(a1);
         
-        Atendimento a2 = new Atendimento(dentista2, StatusAtendimento.Agendado, usuario1 );
+        Atendimento a2 = new Atendimento(paciente1, StatusAtendimento.Agendado, usuario1 );
         a2.add(new AtendimentoItens(servico2, 1));
         a2.add(new AtendimentoItens(servico3, 3));
         
@@ -91,7 +100,7 @@ public class Console {
         
         repoa.Salvar(a3);
         
-        Atendimento a4 = new Atendimento(dentista1, StatusAtendimento.Agendado, usuario1 );
+        Atendimento a4 = new Atendimento(paciente1, StatusAtendimento.Agendado, usuario1 );
         a4.add(new AtendimentoItens(servico2, 1));
         a4.add(new AtendimentoItens(servico1, 1));
         
@@ -99,14 +108,23 @@ public class Console {
          
         
     }
-    public static void main(String[] args) {
-     
-           // criarBase();
-             
-            PessoaPacienteRepositorio repo_pac = new PacienteDAO();
+    public static void main(String[] args){
+        
+          criarBase();
+            
+           /* PessoaPacienteRepositorio repo_pac = new PacienteDAO();
             
             for(Pessoa pac : repo_pac.Buscar(null)){
-                System.out.println(pac.getNome());
-            }
-    }
+            System.out.println(pac.getNome());
+            }*/
+            
+          
+       
+        
+        UsuarioRepositorio repo = RepositorioFactory.getUsuarioRepositorio();
+        Usuario u = repo.Abrir(1L);
+        System.out.println(u.getLogin());
+        
+       
+    }  
 }
