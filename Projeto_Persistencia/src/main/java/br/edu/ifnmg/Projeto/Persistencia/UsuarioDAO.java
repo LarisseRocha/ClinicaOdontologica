@@ -8,6 +8,7 @@ package br.edu.ifnmg.Projeto.Persistencia;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.Usuario;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.UsuarioRepositorio;
 import java.util.List;
+import javax.persistence.Query;
 
 /**
  *
@@ -22,7 +23,14 @@ public class UsuarioDAO extends DataAccessObject<Usuario>
 
     @Override
     public boolean autenticar(String login, String senha) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
+        Query sql = this.manager.createQuery("select o from Usuario o where o.login = :login and o.senha = :senha");
+        sql.setParameter("login", login);
+        sql.setParameter("senha", senha);
+        
+        if(sql.getResultList().size()>0)
+            return true;
+        return false;
     }
 
     @Override

@@ -7,6 +7,7 @@ package br.edu.ifnmg.Projeto_Apresentacao;
 
 import br.edu.ifnmg.Projeto.LogicaAplicacao.RepositorioFactory;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.UsuarioRepositorio;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,7 +22,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         
-        //repositorio = RepositorioFactory.getUsuarioRepositorio();
+        repositorio = RepositorioFactory.getUsuarioRepositorio();
         
         initComponents();
     }
@@ -118,9 +119,17 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // TODO add your handling code here:
-       frmMain tela = new frmMain();
-       tela.setVisible(true);
-       this.setVisible(false);
+       String login = txtLogin.getText();
+       String senha = txtSenha.getPassword().toString();
+       
+      if(repositorio.autenticar(login, senha)){
+        frmMain tela = new frmMain();
+        tela.setVisible(true);
+        this .setVisible(false);
+      }else{
+           JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos","Erro",
+                   JOptionPane.ERROR_MESSAGE);
+      }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
