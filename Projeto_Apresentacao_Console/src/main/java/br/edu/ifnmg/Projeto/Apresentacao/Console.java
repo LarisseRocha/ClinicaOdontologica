@@ -110,7 +110,7 @@ public class Console {
     }
     public static void main(String[] args){
         
-          criarBase();
+//          criarBase();
             
            /* PessoaPacienteRepositorio repo_pac = new PacienteDAO();
             
@@ -122,8 +122,18 @@ public class Console {
        
         
         UsuarioRepositorio repo = RepositorioFactory.getUsuarioRepositorio();
-        Usuario u = repo.Abrir(1L);
-        System.out.println(u.getLogin());
+        
+        /*Usuario u = repo.Abrir(1L);
+        System.out.println(u.getLogin());*/
+        
+        Usuario uw = new Usuario();
+        uw.setLogin("Recepção2");
+        
+       for(Usuario u: repo.Buscar(uw))
+            System.out.println(u);   
+        
+       
+          
         
        
     }  
