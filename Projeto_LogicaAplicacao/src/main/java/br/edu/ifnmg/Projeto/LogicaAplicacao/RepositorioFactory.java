@@ -26,6 +26,7 @@ public class RepositorioFactory {
     private static PessoaPacienteRepositorio paciente;
     private static PessoaDentistaRepositorio dentista;
     private static ServicoRepositorio servico;
+    private static PessoaRepositorio pessoa;
     
     static{
         
@@ -56,8 +57,7 @@ public class RepositorioFactory {
             Class classe = Class.forName(nomeclasse);
             Object instancia =  classe.getDeclaredConstructor().newInstance();
             
-            return instancia;
-            
+            return instancia;           
            
             
           }catch(ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex){
@@ -77,14 +77,6 @@ public class RepositorioFactory {
     
     }
     
-     public static UsuarioRepositorio getUPessoaPacienteRepositorio(){
-        if(paciente == null){
-            String nomeclasse = propriedades.getProperty("PessoaPacienteRepositorio");
-            paciente = (PessoaPacienteRepositorio) getInstancia(nomeclasse);
-        }
-        return usuario;       
-    
-    }
      
       public static ServicoRepositorio getServicoRepositorio(){
         if(servico == null){
@@ -94,9 +86,9 @@ public class RepositorioFactory {
         return servico;       
     
     }
+   
       
-      
-       public static PessoaPacienteRepositorio getPessoaPacienteRepositorio(){
+     public static PessoaPacienteRepositorio getPessoaPacienteRepositorio(){
         if(paciente == null){
             String nomeclasse = propriedades.getProperty("PessoaPacienteRepositorio");
             paciente = (PessoaPacienteRepositorio) getInstancia(nomeclasse);
@@ -104,8 +96,16 @@ public class RepositorioFactory {
         return paciente;       
     
     }
-    
+   
        
+     public static PessoaRepositorio getPessoaRepositorio(){
+        if(pessoa == null){
+            String nomeclasse = propriedades.getProperty("PessoaRepositorio");
+            pessoa = (PessoaRepositorio) getInstancia(nomeclasse);
+        }
+        return pessoa;       
+    
+    }       
          
     
     

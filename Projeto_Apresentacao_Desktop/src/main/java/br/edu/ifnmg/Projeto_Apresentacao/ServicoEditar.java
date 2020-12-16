@@ -98,6 +98,11 @@ public class ServicoEditar extends javax.swing.JInternalFrame {
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlServicosLayout = new javax.swing.GroupLayout(pnlServicos);
         pnlServicos.setLayout(pnlServicosLayout);
@@ -189,7 +194,7 @@ public class ServicoEditar extends javax.swing.JInternalFrame {
                     
             }else{
                     
-                    JOptionPane.showMessageDialog(this, "Falha ao serviço", "Informação",
+                    JOptionPane.showMessageDialog(this, "Falha ao cadastrar serviço", "Informação",
                             JOptionPane.ERROR_MESSAGE);
               }
                   
@@ -219,6 +224,19 @@ public class ServicoEditar extends javax.swing.JInternalFrame {
         }
                 
     }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        
+        
+        if(JOptionPane.showConfirmDialog(this, "Deseja realmente cancelar o cadastro?", "Confirmação", JOptionPane.YES_NO_OPTION)
+                == JOptionPane.YES_OPTION){
+            
+                JOptionPane.showMessageDialog(this, "cadastro cancelado!");
+                dispose();
+        
+        }
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

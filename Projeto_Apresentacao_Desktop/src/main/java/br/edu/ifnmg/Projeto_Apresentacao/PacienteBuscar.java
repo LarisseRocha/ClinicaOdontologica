@@ -8,9 +8,9 @@ package br.edu.ifnmg.Projeto_Apresentacao;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.Paciente;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.PessoaPacienteRepositorio;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.RepositorioFactory;
-import br.edu.ifnmg.Projeto.LogicaAplicacao.Servico;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,18 +19,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PacienteBuscar extends javax.swing.JInternalFrame {
     
-
+    PessoaPacienteRepositorio repositorio;
     Paciente paciente;
-    PessoaPacienteRepositorio repositorio; 
 
     /**
      * Creates new form PacienteBuscar
      */
     public PacienteBuscar() {
         
-        this.repositorio = RepositorioFactory.getPessoaPacienteRepositorio();
+        repositorio = RepositorioFactory.getPessoaPacienteRepositorio();
         paciente = new Paciente();
-       
         initComponents();
     }
 
@@ -45,15 +43,15 @@ public class PacienteBuscar extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
-        btnNovoPaciente = new javax.swing.JButton();
+        btnNovo = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblResultado = new javax.swing.JTable();
 
         setClosable(true);
-        setTitle("Buscar paciente");
+        setTitle("Buscar pacientes");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -66,16 +64,26 @@ public class PacienteBuscar extends javax.swing.JInternalFrame {
             }
         });
 
-        btnNovoPaciente.setText("Novo Paciente");
+        btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
 
         btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         tblResultado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "cpf"
+                "ID", "nome"
             }
         ) {
             Class[] types = new Class [] {
@@ -93,36 +101,36 @@ public class PacienteBuscar extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(btnNovoPaciente)
-                        .addGap(31, 31, 31)
-                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnBuscar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(76, 76, 76)
+                .addGap(56, 56, 56)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
-                    .addComponent(btnNovoPaciente)
+                    .addComponent(btnNovo)
                     .addComponent(btnLimpar))
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -141,36 +149,57 @@ public class PacienteBuscar extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        
-       /* paciente.setCpf(txtCpf.getText());
+        paciente.setNome(txtNome.getText());
         
         List<Paciente> resultado = repositorio.Buscar(paciente);
         
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("id");
-        modelo.addColumn("cpf");
+        modelo.addColumn("nome");
         
-        for(Paciente s : resultado){
+        for(Paciente u : resultado){
             
             Vector linha = new Vector();
-            linha.add(s.getId());
-            linha.add(s.getCpf());
+            linha.add(u.getId());
+            linha.add(u.getNome());
             
             modelo.addRow(linha);
             
             tblResultado.setModel(modelo);
-        }*/
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        // TODO add your handling code here:
+        PacienteEditar tela = new PacienteEditar(new Paciente());
+        this.getParent().add(tela);
+        tela.setVisible(true);
+    }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        // TODO add your handling code here:
+        
+            if(JOptionPane.showConfirmDialog(this,"Deseja realmente limpar a busca?", "Confirmação", JOptionPane.YES_NO_OPTION)
+                == JOptionPane.YES_OPTION){ 
+            txtNome.setText("");
+
+
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("id");
+            modelo.addColumn("login");
+            tblResultado.setModel(modelo);
+        }
+    }//GEN-LAST:event_btnLimparActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnLimpar;
-    private javax.swing.JButton btnNovoPaciente;
+    private javax.swing.JButton btnNovo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblResultado;
+    private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }

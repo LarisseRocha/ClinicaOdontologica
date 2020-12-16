@@ -199,16 +199,16 @@ public class UsuarioBuscar extends javax.swing.JInternalFrame {
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // TODO add your handling code here:
-    if(JOptionPane.showConfirmDialog(this,"Deseja realmente limpar a busca?", "Confirmação", JOptionPane.YES_NO_OPTION)
-            == JOptionPane.YES_OPTION){ 
-        txtLogin.setText("");
-        
-        
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("id");
-        modelo.addColumn("login");
-        tblResultado.setModel(modelo);
-    }
+        if(JOptionPane.showConfirmDialog(this,"Deseja realmente limpar a busca?", "Confirmação", JOptionPane.YES_NO_OPTION)
+                == JOptionPane.YES_OPTION){ 
+            txtLogin.setText("");
+
+
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("id");
+            modelo.addColumn("login");
+            tblResultado.setModel(modelo);
+        }
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed

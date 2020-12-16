@@ -5,43 +5,48 @@
  */
 package br.edu.ifnmg.Projeto_Apresentacao;
 
+import br.edu.ifnmg.Projeto.LogicaAplicacao.Paciente;
+import br.edu.ifnmg.Projeto.LogicaAplicacao.PessoaPacienteRepositorio;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.RepositorioFactory;
-import br.edu.ifnmg.Projeto.LogicaAplicacao.Usuario;
-import br.edu.ifnmg.Projeto.LogicaAplicacao.UsuarioRepositorio;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author larisse
  */
-public class UsuarioEditar extends javax.swing.JInternalFrame {
-    
-    
-    Usuario usuario;
-    UsuarioRepositorio repositorio;
+public class PacienteEditar extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form UsuarioEditar
+     * Creates new form PacienteEditar
      */
-    public UsuarioEditar(Usuario u) {
+    
+    Paciente paciente;
+    PessoaPacienteRepositorio repositorio;
+    
+    
+    public PacienteEditar(Paciente pac) {
         
-        this.usuario = u;
-        this.repositorio = RepositorioFactory.getUsuarioRepositorio();
+        this.paciente = pac;
+        this.repositorio = RepositorioFactory.getPessoaPacienteRepositorio();               
         initComponents();
         this.setComponentes();
+        
     }
 
-    private void setComponentes(){
+     private void setComponentes(){
         
-        this.lblId.setText(this.usuario.getId().toString());
-        this.txtLogin.setText(this.usuario.getLogin());
-        this.txtSenha.setText(this.usuario.getSenha());
+        this.lblId.setText(this.paciente.getId().toString());
+        this.txtNome.setText(this.paciente.getNome());
+        this.txtCpf.setText(this.paciente.getCpf());
+        this.txtTelefone.setText(this.paciente.getTelefone());
+        
+       
     }
     
      private void getComponentes(){
         
-        this.usuario.setLogin(this.txtLogin.getText());
-        this.usuario.setSenha(String.valueOf(txtSenha.getPassword()));
+        this.paciente.setNome(this.txtNome.getText());
+       
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,23 +59,22 @@ public class UsuarioEditar extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtLogin = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JButton();
-        btnRemover = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        txtSenha = new javax.swing.JPasswordField();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtCpf = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtTelefone = new javax.swing.JTextField();
 
-        setClosable(true);
-        setTitle("Editar Usuário");
+        setTitle("Editar cliente");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("Login:");
-
-        jLabel2.setText("Senha:");
+        jLabel1.setText("Nome:");
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -79,10 +83,10 @@ public class UsuarioEditar extends javax.swing.JInternalFrame {
             }
         });
 
-        btnRemover.setText("Remover");
-        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpar.setText("Remover");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoverActionPerformed(evt);
+                btnLimparActionPerformed(evt);
             }
         });
 
@@ -93,71 +97,85 @@ public class UsuarioEditar extends javax.swing.JInternalFrame {
             }
         });
 
-        txtSenha.setText("jPasswordField1");
-
-        jLabel3.setText("ID:");
+        jLabel2.setText("ID:");
 
         lblId.setText("0");
+
+        jLabel3.setText("CPF:");
+
+        jLabel4.setText("Telefone:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnSalvar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRemover)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
                         .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtLogin)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                            .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(124, Short.MAX_VALUE))
+                        .addComponent(btnLimpar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addComponent(btnCancelar)
+                        .addGap(128, 128, 128))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblId))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel3))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtNome)
+                                        .addComponent(txtCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(lblId))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                    .addComponent(lblId))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar)
                     .addComponent(btnSalvar)
-                    .addComponent(btnRemover)
-                    .addComponent(btnCancelar))
-                .addContainerGap(76, Short.MAX_VALUE))
+                    .addComponent(btnLimpar))
+                .addGap(46, 46, 46))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 10, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -165,10 +183,10 @@ public class UsuarioEditar extends javax.swing.JInternalFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-        if(JOptionPane.showConfirmDialog(this, "Deseja realmente salvar os dados do usuário:", "Confirmar", JOptionPane.YES_NO_OPTION)
+         if(JOptionPane.showConfirmDialog(this, "Deseja realmente salvar os dados do paciente:", "Confirmar", JOptionPane.YES_NO_OPTION)
                 == JOptionPane.YES_OPTION){
             this.getComponentes();
-             if(repositorio.Salvar(this.usuario)){
+             if(repositorio.Salvar(this.paciente)){
                JOptionPane.showMessageDialog(this, "Dados salvos com sucesso!", "Informação", JOptionPane.INFORMATION_MESSAGE );
                this.setComponentes();
                     
@@ -184,14 +202,14 @@ public class UsuarioEditar extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // TODO add your handling code here:
-        
+           
         if(JOptionPane.showConfirmDialog(this, "Deseja realmente remover esse usuário?", "Confirmação", JOptionPane.YES_NO_OPTION)
                 
                 == JOptionPane.YES_OPTION){
                    
-                    if(repositorio.Apagar(this.usuario)){
+                    if(repositorio.Apagar(this.paciente)){
                        this.setVisible(true);
 
                     }else{
@@ -202,9 +220,8 @@ public class UsuarioEditar extends javax.swing.JInternalFrame {
                  
             
         }
-                
-                
-    }//GEN-LAST:event_btnRemoverActionPerformed
+        
+    }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
@@ -216,20 +233,21 @@ public class UsuarioEditar extends javax.swing.JInternalFrame {
             dispose();
         
         }
-        
     }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnRemover;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblId;
-    private javax.swing.JTextField txtLogin;
-    private javax.swing.JPasswordField txtSenha;
+    private javax.swing.JTextField txtCpf;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }

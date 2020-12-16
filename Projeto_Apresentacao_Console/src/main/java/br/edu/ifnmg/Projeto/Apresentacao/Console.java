@@ -121,7 +121,7 @@ public class Console {
           
        
         
-        UsuarioRepositorio repo = RepositorioFactory.getUsuarioRepositorio();
+        /*UsuarioRepositorio repo = RepositorioFactory.getUsuarioRepositorio();
         
        
         
@@ -129,7 +129,7 @@ public class Console {
         uw.setLogin("Recepção2");
         
        for(Usuario u: repo.Buscar(uw))
-            System.out.println(u);  
+            System.out.println(u);  */
        
        
         
