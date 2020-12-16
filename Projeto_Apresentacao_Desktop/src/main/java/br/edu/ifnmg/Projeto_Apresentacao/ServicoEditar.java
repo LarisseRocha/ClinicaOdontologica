@@ -5,19 +5,43 @@
  */
 package br.edu.ifnmg.Projeto_Apresentacao;
 
+import br.edu.ifnmg.Projeto.LogicaAplicacao.RepositorioFactory;
+import br.edu.ifnmg.Projeto.LogicaAplicacao.Servico;
+import br.edu.ifnmg.Projeto.LogicaAplicacao.ServicoRepositorio;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author larisse
  */
 public class ServicoEditar extends javax.swing.JInternalFrame {
 
+    
+    Servico servico;
+    ServicoRepositorio repositorio;
     /**
      * Creates new form ServicoEditar
      */
-    public ServicoEditar() {
+    public ServicoEditar(Servico s) {
+        
+        this.servico = s;
+        this.repositorio = RepositorioFactory.getServicoRepositorio();        
         initComponents();
+        this.setComponentes();
     }
 
+     private void setComponentes(){
+        
+        this.lblId.setText(this.servico.getId().toString());
+        this.txtDescricao.setText(this.servico.getDescricao());
+        this.txtValor.setText(this.servico.getValor().toString());
+    }
+    
+     private void getComponentes(){
+        
+        this.servico.setDescricao(this.txtDescricao.getText());
+        //this.servico.setValor(this.txtValor.getText());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,15 +51,21 @@ public class ServicoEditar extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnlServicos = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JTextField();
         txtValor = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
+        btnRemover = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        setClosable(true);
+
+        pnlServicos.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setText("Cadastro de serviço");
 
@@ -43,73 +73,164 @@ public class ServicoEditar extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Valor:");
 
-        jButton1.setText("Cadastrar serviço");
+        txtDescricao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescricaoActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        btnSalvar.setText("Salvar serviço");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("ID:");
+
+        lblId.setText("O");
+
+        btnRemover.setText("Remover");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setText("Cancelar");
+
+        javax.swing.GroupLayout pnlServicosLayout = new javax.swing.GroupLayout(pnlServicos);
+        pnlServicos.setLayout(pnlServicosLayout);
+        pnlServicosLayout.setHorizontalGroup(
+            pnlServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlServicosLayout.createSequentialGroup()
+                .addGroup(pnlServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlServicosLayout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(pnlServicosLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(28, 28, 28)
-                                .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(60, 60, 60)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1)
-                                    .addComponent(txtValor))))))
-                .addContainerGap(63, Short.MAX_VALUE))
+                        .addGroup(pnlServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlServicosLayout.createSequentialGroup()
+                                .addComponent(btnSalvar)
+                                .addGap(30, 30, 30)
+                                .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlServicosLayout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(60, 60, 60)
+                                    .addComponent(txtValor, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlServicosLayout.createSequentialGroup()
+                                    .addGroup(pnlServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel4))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(pnlServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblId)
+                                        .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlServicosLayout.setVerticalGroup(
+            pnlServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlServicosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(37, 37, 37)
+                .addGroup(pnlServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(lblId))
+                .addGap(18, 18, 18)
+                .addGroup(pnlServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
-                .addComponent(jButton1)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addGroup(pnlServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(38, 38, 38)
+                .addGroup(pnlServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar)
+                    .addComponent(btnRemover)
+                    .addComponent(btnCancelar))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlServicos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pnlServicos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescricaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescricaoActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // TODO add your handling code here:
+         // TODO add your handling code here:
+        if(JOptionPane.showConfirmDialog(this, "Deseja realmente salvar um novo serviço:", "Confirmar", JOptionPane.YES_NO_OPTION)
+                == JOptionPane.YES_OPTION){
+            this.getComponentes();
+             if(repositorio.Salvar(this.servico)){
+               JOptionPane.showMessageDialog(this, "Serviço salvo com sucesso!", "Informação", JOptionPane.INFORMATION_MESSAGE );
+               this.setComponentes();
+                    
+            }else{
+                    
+                    JOptionPane.showMessageDialog(this, "Falha ao serviço", "Informação",
+                            JOptionPane.ERROR_MESSAGE);
+              }
+                  
+        }else{
+              JOptionPane.showMessageDialog(this, "Operação cancelada","Informação", JOptionPane.INFORMATION_MESSAGE);
+                 
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        // TODO add your handling code here:
+        
+        if(JOptionPane.showConfirmDialog(this, "Deseja realmente remover esse servico?", "Confirmação", JOptionPane.YES_NO_OPTION)
+                
+                == JOptionPane.YES_OPTION){
+                   
+                    if(repositorio.Apagar(this.servico)){
+                       this.setVisible(true);
+
+                    }else{
+
+                            JOptionPane.showMessageDialog(this, "Falha ao salvar os dados", "Informação",
+                                    JOptionPane.ERROR_MESSAGE);
+                      }
+                 
+            
+        }
+                
+    }//GEN-LAST:event_btnRemoverActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnRemover;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblId;
+    private javax.swing.JPanel pnlServicos;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables

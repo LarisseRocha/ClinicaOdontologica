@@ -24,38 +24,29 @@ public class PacienteDAO extends DataAccessObject<Paciente> implements PessoaPac
 
     @Override
     public List<Paciente> Buscar(Paciente obj) {
-      /*String jpql = "select pac from Paciente pac";  
+      String jpql = "select pac from Paciente pac";  
       String filtro = "";
       Hashtable<String, Object> parametros = new Hashtable<>();
       
       if(obj != null){
       
-        if(obj.getNome().length()>0){
+        if(obj.getCpf().length()>0){
 
             filtro += "pac.nome like :nome";
             parametros.put("nome", obj.getNome() + "%");
         }
-
-        if(obj.getTelefone() != null){
-
-            if(filtro.length() > 0) filtro += "and";
-            filtro += "pac.email =: email";
-            parametros.put("email", obj.getTelefone() + "%");
-        }
       
       }
-     if(filtro.length()>0)  
-        jpql = jpql +"where" +filtro;
-     Query consulta = this.manager.createQuery(jpql);
+        if(filtro.length()>0)  
+           jpql = jpql +"where" +filtro;
+        Query consulta = this.manager.createQuery(jpql);
 
-     for(String chave : parametros.keySet()) 
-            consulta.setParameter(chave, parametros.get(obj));
-     
-     return consulta.getResultList();*/
-      Query consulta = this.manager.createQuery("select pac from Paciente pac");
-      return consulta.getResultList();
-       
-    }
+        for(String chave : parametros.keySet()) 
+               consulta.setParameter(chave, parametros.get(chave));
+
+        return consulta.getResultList();
+
+       }
 
     @Override
     public Paciente AbrirPorCpf(String cpf) {

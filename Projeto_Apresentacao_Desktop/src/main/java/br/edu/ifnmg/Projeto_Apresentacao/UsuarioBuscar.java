@@ -81,6 +81,11 @@ public class UsuarioBuscar extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblResultado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblResultadoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblResultado);
         if (tblResultado.getColumnModel().getColumnCount() > 0) {
             tblResultado.getColumnModel().getColumn(0).setResizable(false);
@@ -109,6 +114,12 @@ public class UsuarioBuscar extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setText("Login:");
+
+        txtLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLoginActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -206,6 +217,23 @@ public class UsuarioBuscar extends javax.swing.JInternalFrame {
         this.getParent().add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void tblResultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblResultadoMouseClicked
+        // TODO add your handling code here:
+        int linha = tblResultado.getSelectedRow();
+        
+        Long id = Long.parseLong(tblResultado.getValueAt(linha, 0).toString());
+        
+        Usuario u = repositorio.Abrir(id);
+        
+        UsuarioEditar tela = new UsuarioEditar(u);
+        this.getParent().add(tela);
+        tela.setVisible(true);
+    }//GEN-LAST:event_tblResultadoMouseClicked
+
+    private void txtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLoginActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

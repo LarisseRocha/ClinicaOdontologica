@@ -85,5 +85,28 @@ public class RepositorioFactory {
         return usuario;       
     
     }
+     
+      public static ServicoRepositorio getServicoRepositorio(){
+        if(servico == null){
+            String nomeclasse = propriedades.getProperty("ServicoRepositorio");
+            servico = (ServicoRepositorio) getInstancia(nomeclasse);
+        }
+        return servico;       
+    
+    }
+      
+      
+       public static PessoaPacienteRepositorio getPessoaPacienteRepositorio(){
+        if(paciente == null){
+            String nomeclasse = propriedades.getProperty("PessoaPacienteRepositorio");
+            paciente = (PessoaPacienteRepositorio) getInstancia(nomeclasse);
+        }
+        return paciente;       
+    
+    }
+    
+       
+         
+    
     
 }

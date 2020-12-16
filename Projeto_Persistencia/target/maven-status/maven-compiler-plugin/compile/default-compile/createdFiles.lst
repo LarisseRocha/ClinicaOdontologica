@@ -1,7 +1,4 @@
 br/edu/ifnmg/Projeto/Persistencia/ServicoDAO.class
-br/edu/ifnmg/Projeto/Persistencia/DentistaDAO.class
+br/edu/ifnmg/Projeto/Persistencia/PessoaDAO.class
 br/edu/ifnmg/Projeto/Persistencia/DataAccessObject.class
 br/edu/ifnmg/Projeto/Persistencia/UsuarioDAO.class
-br/edu/ifnmg/Projeto/Persistencia/AtendimentoDAO.class
-br/edu/ifnmg/Projeto/Persistencia/PacienteDAO.class
-br/edu/ifnmg/Projeto/Persistencia/PessoaDAO.class

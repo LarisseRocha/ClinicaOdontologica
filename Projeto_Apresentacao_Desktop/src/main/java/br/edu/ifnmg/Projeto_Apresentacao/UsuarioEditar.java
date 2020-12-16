@@ -80,6 +80,11 @@ public class UsuarioEditar extends javax.swing.JInternalFrame {
         });
 
         btnRemover.setText("Remover");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
 
@@ -166,13 +171,35 @@ public class UsuarioEditar extends javax.swing.JInternalFrame {
                     
                     JOptionPane.showMessageDialog(this, "Falha ao salvar os dados", "Informação",
                             JOptionPane.ERROR_MESSAGE);
-                }
+              }
                   
         }else{
               JOptionPane.showMessageDialog(this, "Operação cancelada","Informação", JOptionPane.INFORMATION_MESSAGE);
                  
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        // TODO add your handling code here:
+        
+        if(JOptionPane.showConfirmDialog(this, "Deseja realmente remover esse usuário?", "Confirmação", JOptionPane.YES_NO_OPTION)
+                
+                == JOptionPane.YES_OPTION){
+                   
+                    if(repositorio.Apagar(this.usuario)){
+                       this.setVisible(true);
+
+                    }else{
+
+                            JOptionPane.showMessageDialog(this, "Falha ao salvar os dados", "Informação",
+                                    JOptionPane.ERROR_MESSAGE);
+                      }
+                 
+            
+        }
+                
+                
+    }//GEN-LAST:event_btnRemoverActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

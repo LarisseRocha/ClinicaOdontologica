@@ -31,6 +31,9 @@ public class frmMain extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         mnCadastros = new javax.swing.JMenu();
         mnUsuario = new javax.swing.JMenuItem();
+        mnPaciente = new javax.swing.JMenuItem();
+        mnDentista = new javax.swing.JMenuItem();
+        mnServico = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ProjetoClinica");
@@ -48,6 +51,25 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         mnCadastros.add(mnUsuario);
+
+        mnPaciente.setText("Pacientes");
+        mnPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnPacienteActionPerformed(evt);
+            }
+        });
+        mnCadastros.add(mnPaciente);
+
+        mnDentista.setText("Dentistas");
+        mnCadastros.add(mnDentista);
+
+        mnServico.setText("Serviços");
+        mnServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnServicoActionPerformed(evt);
+            }
+        });
+        mnCadastros.add(mnServico);
 
         jMenuBar2.add(mnCadastros);
 
@@ -73,6 +95,18 @@ public class frmMain extends javax.swing.JFrame {
         this.add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_mnUsuarioActionPerformed
+
+    private void mnPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPacienteActionPerformed
+        // TODO add your handling code here:
+      
+    }//GEN-LAST:event_mnPacienteActionPerformed
+
+    private void mnServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnServicoActionPerformed
+        // TODO add your handling code here:
+        ServicoBuscar tela = new ServicoBuscar();
+        this.add(tela);
+        tela.setVisible(true);
+    }//GEN-LAST:event_mnServicoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -113,6 +147,9 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu mnCadastros;
+    private javax.swing.JMenuItem mnDentista;
+    private javax.swing.JMenuItem mnPaciente;
+    private javax.swing.JMenuItem mnServico;
     private javax.swing.JMenuItem mnUsuario;
     // End of variables declaration//GEN-END:variables
 }
