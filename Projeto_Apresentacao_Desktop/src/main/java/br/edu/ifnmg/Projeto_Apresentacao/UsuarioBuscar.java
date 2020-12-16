@@ -202,6 +202,9 @@ public class UsuarioBuscar extends javax.swing.JInternalFrame {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         // TODO add your handling code here:
+        UsuarioEditar tela = new UsuarioEditar(new Usuario());
+        this.getParent().add(tela);
+        tela.setVisible(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
 
