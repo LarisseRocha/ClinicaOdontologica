@@ -36,7 +36,7 @@ public class Pessoa implements Serializable {
     private Long id;
     
     @Column(nullable = false, length = 250)
-    private String nome;
+     String nome;
     
     @Enumerated(EnumType.ORDINAL)
     private PessoaTipo tipo;

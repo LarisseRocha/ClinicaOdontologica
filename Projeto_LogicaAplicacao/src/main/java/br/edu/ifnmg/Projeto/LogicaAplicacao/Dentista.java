@@ -112,7 +112,7 @@ public class Dentista extends Pessoa implements Serializable {
 
     @Override
     public String toString() {
-        return cpf;
+        return this.nome;
     }
     
 }

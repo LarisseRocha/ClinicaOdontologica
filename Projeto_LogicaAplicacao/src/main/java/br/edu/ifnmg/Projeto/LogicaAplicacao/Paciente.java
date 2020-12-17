@@ -62,6 +62,7 @@ public class Paciente extends Pessoa implements Serializable {
     }
 
     
+
     public String getTelefone() {
         return telefone;
     }

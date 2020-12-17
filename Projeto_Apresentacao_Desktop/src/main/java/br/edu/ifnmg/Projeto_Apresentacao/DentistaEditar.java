@@ -222,6 +222,7 @@ public class DentistaEditar extends javax.swing.JInternalFrame {
              if(repositorio.Salvar(this.dentista)){
                JOptionPane.showMessageDialog(this, "Dados salvos com sucesso!", "Informação", JOptionPane.INFORMATION_MESSAGE );
                this.setComponentes();
+               
                     
             }else{
                     

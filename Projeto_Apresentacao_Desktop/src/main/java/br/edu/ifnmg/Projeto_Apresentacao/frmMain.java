@@ -78,6 +78,11 @@ public class frmMain extends javax.swing.JFrame {
         mnCadastros.add(mnServico);
 
         mnAtendimento.setText("Atendimentos");
+        mnAtendimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAtendimentoActionPerformed(evt);
+            }
+        });
         mnCadastros.add(mnAtendimento);
 
         jMenuBar2.add(mnCadastros);
@@ -126,6 +131,14 @@ public class frmMain extends javax.swing.JFrame {
         this.add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_mnDentistaActionPerformed
+
+    private void mnAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAtendimentoActionPerformed
+        // TODO add your handling code here:
+        AgendarAtendimento tela = new AgendarAtendimento();
+        this.add(tela);
+        tela.setVisible(true);
+        
+    }//GEN-LAST:event_mnAtendimentoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -27,6 +27,7 @@ public class RepositorioFactory {
     private static PessoaDentistaRepositorio dentista;
     private static ServicoRepositorio servico;
     private static PessoaRepositorio pessoa;
+    private static AtendimentoRepositorio atendimento;
     
     static{
         
@@ -113,6 +114,15 @@ public class RepositorioFactory {
             pessoa = (PessoaRepositorio) getInstancia(nomeclasse);
         }
         return pessoa;       
+    
+    }       
+     
+       public static AtendimentoRepositorio getAtendimentoRepositorio(){
+        if(atendimento == null){
+            String nomeclasse = propriedades.getProperty("AtendimentoRepositorio");
+            atendimento = (AtendimentoRepositorio) getInstancia(nomeclasse);
+        }
+        return atendimento;       
     
     }       
          
