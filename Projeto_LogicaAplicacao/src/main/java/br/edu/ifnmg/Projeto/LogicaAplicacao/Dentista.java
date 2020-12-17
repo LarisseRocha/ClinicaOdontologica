@@ -55,6 +55,8 @@ public class Dentista extends Pessoa implements Serializable {
         this.version = 1;
     }
 
+    
+
     public String getCpf() {
         return cpf;
     }

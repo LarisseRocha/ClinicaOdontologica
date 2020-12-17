@@ -7,6 +7,7 @@ package br.edu.ifnmg.Projeto.Persistencia;
 
 import br.edu.ifnmg.Projeto.LogicaAplicacao.Paciente;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.PessoaPacienteRepositorio;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import javax.persistence.Query;
@@ -24,31 +25,57 @@ public class PacienteDAO extends DataAccessObject<Paciente>
 
     @Override
     public List<Paciente> Buscar(Paciente obj) {
-        String jpql = "select pac from Paciente pac";  
-        String filtro = "";
-        Hashtable<String, Object> parametros = new Hashtable<>();
-
-        if(obj != null){
-
-          if(obj.getNome().length()>0){
-
-              filtro += "pac.nome like :nome";
-              parametros.put("nome", obj.getNome() + "%");
-          }
-
-        }
         
-          if(filtro.length()>0)  
-             jpql = jpql +"where" +filtro;
-          Query consulta = this.manager.createQuery(jpql);
+        String jpql = "select pac from Paciente pac";
+        //String filtros = "";
+        HashMap<String, Object> parametros = new HashMap<>();
+        
+            if(obj != null){
 
-          for(String chave : parametros.keySet()) 
-                 consulta.setParameter(chave, parametros.get(chave));
+                if(obj.getNome() != null & !obj.getNome().isEmpty())
+                    parametros.put("nome", obj.getNome());
+                if(obj.getId()> 0)
+                    parametros.put("id", obj.getId());
+            }
+            
+            if(obj.getTelefone().length() > 0){
+                String filtros = "";
+                filtros += "pac.telefone like :telefone";
+                parametros.put("telefone", obj.getTelefone() + "%");
+            }
+            
+             if(obj.getCpf().length() > 0){
+                String filtros = "";
+                filtros += "pac.cpf like :cpf";
+                parametros.put("cpf", obj.getTelefone() + "%");
+            }
+             
+            if(!parametros.isEmpty()){
+                String filtros = "";
+                jpql += " where ";
+                for(String campo : parametros.keySet()){
+                    if(!filtros.isEmpty())
+                        filtros += " and ";
+                    jpql += "pac." + campo + " =:" + campo;
+                }
+                jpql += filtros;
+            }
 
-          return consulta.getResultList();
-          
-
-    }
+            
+            
+            Query sql = this.manager.createQuery(jpql);
+            
+            
+            if(!parametros.isEmpty())
+                for(String campo: parametros.keySet())
+                    sql.setParameter(campo, parametros.get(campo));
+            
+            return sql.getResultList();
+           
+           
+            
+    }     
+     
 
 /*    @Override
     public Paciente AbrirPorCpf(String cpf) {
@@ -57,8 +84,6 @@ public class PacienteDAO extends DataAccessObject<Paciente>
       return (Paciente) consulta.getSingleResult();
     }*/
 
-
-    
  
     
 }

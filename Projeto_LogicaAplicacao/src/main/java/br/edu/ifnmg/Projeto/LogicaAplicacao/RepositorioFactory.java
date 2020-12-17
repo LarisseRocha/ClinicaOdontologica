@@ -96,6 +96,15 @@ public class RepositorioFactory {
         return paciente;       
     
     }
+     
+      public static PessoaDentistaRepositorio getPessoaDentistaRepositorio(){
+        if(dentista == null){
+            String nomeclasse = propriedades.getProperty("PessoaDentistaRepositorio");
+           dentista = (PessoaDentistaRepositorio) getInstancia(nomeclasse);
+        }
+        return dentista;       
+    
+    }
    
        
      public static PessoaRepositorio getPessoaRepositorio(){

@@ -10,6 +10,7 @@ import br.edu.ifnmg.Projeto.LogicaAplicacao.Servico;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.ServicoRepositorio;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -71,6 +72,11 @@ public class ServicoBuscar extends javax.swing.JInternalFrame {
         });
 
         btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         tblResultado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -189,6 +195,21 @@ public class ServicoBuscar extends javax.swing.JInternalFrame {
         tela.setVisible(true);
         
     }//GEN-LAST:event_btnServicoActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        // TODO add your handling code here:
+        
+          if(JOptionPane.showConfirmDialog(this,"Deseja realmente limpar a busca?", "Confirmação", JOptionPane.YES_NO_OPTION)
+                == JOptionPane.YES_OPTION){ 
+            txtDescricao.setText("");
+
+
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("id");
+            modelo.addColumn("nome");
+            tblResultado.setModel(modelo);
+        }
+    }//GEN-LAST:event_btnLimparActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

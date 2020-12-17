@@ -8,6 +8,7 @@ package br.edu.ifnmg.Projeto.Persistencia;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.Dentista;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.Paciente;
 import br.edu.ifnmg.Projeto.LogicaAplicacao.PessoaDentistaRepositorio;
+import java.util.HashMap;
 import java.util.List;
 import javax.persistence.Query;
 
@@ -18,15 +19,63 @@ import javax.persistence.Query;
 public class DentistaDAO extends DataAccessObject<Dentista> implements PessoaDentistaRepositorio {
 
     public DentistaDAO() {
-        super(Paciente.class);
+        super(Dentista.class);
     }
 
   
     @Override
     public List<Dentista> Buscar(Dentista obj) {
-       /*Query consulta = this.manager.createQuery("select dt from Dentista");
-       return consulta.getResultList();*/
-        throw new UnsupportedOperationException("Not supported yet.");
+       String jpql = "select d from Dentista d";
+        //String filtros = "";
+        HashMap<String, Object> parametros = new HashMap<>();
+        
+            if(obj != null){
+
+                if(obj.getNome() != null & !obj.getNome().isEmpty())
+                    parametros.put("nome", obj.getNome());
+                if(obj.getId()> 0)
+                    parametros.put("id", obj.getId());
+            }
+            
+            if(obj.getCpf().length() > 0){
+                String filtros = "";
+                filtros += "d.Cpf like :d";
+                parametros.put("Cpf", obj.getCpf() + "%");
+            }
+            
+             if(obj.getRg().length() > 0){
+                String filtros = "";
+                filtros += "d.cpf like :d";
+                parametros.put("rg", obj.getRg() + "%");
+            }
+             
+            if(obj.getRegistro().length() > 0){
+                String filtros = "";
+                filtros += "d.cpf like :d";
+                parametros.put("registro", obj.getRegistro() + "%");
+            }
+             
+            if(!parametros.isEmpty()){
+                String filtros = "";
+                jpql += " where ";
+                for(String campo : parametros.keySet()){
+                    if(!filtros.isEmpty())
+                        filtros += " and ";
+                    jpql += "d." + campo + " =:" + campo;
+                }
+                jpql += filtros;
+            }
+      
+            Query sql = this.manager.createQuery(jpql);
+            
+            
+            if(!parametros.isEmpty())
+                for(String campo: parametros.keySet())
+                    sql.setParameter(campo, parametros.get(campo));
+            
+            return sql.getResultList();
+           
+           
     }
 
    /* @Override
@@ -39,3 +88,5 @@ public class DentistaDAO extends DataAccessObject<Dentista> implements PessoaDen
    
     
 }
+
+// throw new UnsupportedOperationException("Not supported yet.");

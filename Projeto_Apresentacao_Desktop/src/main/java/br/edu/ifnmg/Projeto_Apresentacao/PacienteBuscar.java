@@ -83,15 +83,20 @@ public class PacienteBuscar extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "nome"
+                "ID", "nome", "cpf", "telefone"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        tblResultado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblResultadoMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblResultado);
@@ -103,18 +108,21 @@ public class PacienteBuscar extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnBuscar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(77, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnBuscar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 181, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,8 +137,8 @@ public class PacienteBuscar extends javax.swing.JInternalFrame {
                     .addComponent(btnNovo)
                     .addComponent(btnLimpar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -154,14 +162,20 @@ public class PacienteBuscar extends javax.swing.JInternalFrame {
         List<Paciente> resultado = repositorio.Buscar(paciente);
         
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("id");
+        modelo.addColumn("ID");
         modelo.addColumn("nome");
+        modelo.addColumn("cpf");
+        modelo.addColumn("telefone");
+       
+      
         
-        for(Paciente u : resultado){
+        for(Paciente p : resultado){
             
             Vector linha = new Vector();
-            linha.add(u.getId());
-            linha.add(u.getNome());
+            linha.add(p.getId());
+            linha.add(p.getNome());
+            linha.add(p.getCpf());            
+            linha.add(p.getTelefone());
             
             modelo.addRow(linha);
             
@@ -186,10 +200,26 @@ public class PacienteBuscar extends javax.swing.JInternalFrame {
 
             DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("id");
-            modelo.addColumn("login");
+            modelo.addColumn("nome");
+            modelo.addColumn("cpf");
+            modelo.addColumn("telefone");
             tblResultado.setModel(modelo);
         }
     }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void tblResultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblResultadoMouseClicked
+        // TODO add your handling code here:
+        
+            int linha = tblResultado.getSelectedRow();
+        
+            Long id = Long.parseLong(tblResultado.getValueAt(linha, 0).toString());
+
+            Paciente p = repositorio.Abrir(id);
+
+            PacienteEditar tela = new PacienteEditar(p);
+            this.getParent().add(tela);
+            tela.setVisible(true);
+    }//GEN-LAST:event_tblResultadoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

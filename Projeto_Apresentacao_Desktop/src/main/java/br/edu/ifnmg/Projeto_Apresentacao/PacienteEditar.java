@@ -46,7 +46,9 @@ public class PacienteEditar extends javax.swing.JInternalFrame {
      private void getComponentes(){
         
         this.paciente.setNome(this.txtNome.getText());
-       
+        this.paciente.setCpf(this.txtCpf.getText());
+        this.paciente.setTelefone(this.txtTelefone.getText());
+   
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,7 +72,8 @@ public class PacienteEditar extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JTextField();
 
-        setTitle("Editar cliente");
+        setClosable(true);
+        setTitle("Cadastrar paciente");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -194,7 +197,7 @@ public class PacienteEditar extends javax.swing.JInternalFrame {
                     
                     JOptionPane.showMessageDialog(this, "Falha ao salvar os dados", "Informação",
                             JOptionPane.ERROR_MESSAGE);
-              }
+            }
                   
         }else{
               JOptionPane.showMessageDialog(this, "Operação cancelada","Informação", JOptionPane.INFORMATION_MESSAGE);
@@ -216,7 +219,7 @@ public class PacienteEditar extends javax.swing.JInternalFrame {
 
                             JOptionPane.showMessageDialog(this, "Falha ao salvar os dados", "Informação",
                                     JOptionPane.ERROR_MESSAGE);
-                      }
+                    }
                  
             
         }

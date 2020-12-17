@@ -32,6 +32,7 @@ public class Paciente extends Pessoa implements Serializable {
     
     @Version
     private int version;
+   
 
     public Paciente() {
         
@@ -60,6 +61,7 @@ public class Paciente extends Pessoa implements Serializable {
         this.cpf = cpf;
     }
 
+    
     public String getTelefone() {
         return telefone;
     }
